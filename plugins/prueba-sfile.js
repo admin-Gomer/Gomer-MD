@@ -4,18 +4,18 @@ import fetch from 'node-fetch'
 let handler = async (m, { conn, text }) => {
 if (text.match(/(https:\/\/sfile.mobi\/)/gi)) {
 let res = await sfileDl(text)
-if (!res) throw 'Error :/'
-await m.reply(Object.keys(res).map(v => `*• ${v.capitalize()}:* ${res[v]}`).join('\n') + '\n\n_Enviando archivo..._')
+if (!res) throw 'Ошибка :/'
+await m.reply(Object.keys(res).map(v => `*• ${v.capitalize()}:* ${res[v]}`).join('\n') + '\n\n_Отправка файла..._')
 conn.sendMessage(m.chat, { document: { url: res.download }, fileName: res.filename, mimetype: res.mimetype }, { quoted: m })
 } else if (text) {
 let [query, page] = text.split`|`
 let res = await sfileSearch(query, page)
 if (!res.length) throw `La consulta "${text}" no funciona.`
-res = res.map((v) => `*Título:* ${v.title}\n*Tamaño:* ${v.size}\n*Enlace:* ${v.link}`).join`\n\n`
+res = res.map((v) => `*Титул:* ${v.title}\n*Размер:* ${v.size}\n*Связь:* ${v.link}`).join`\n\n`
 m.reply(res)
-} else throw 'Consulta de entrada / URL de archivo!!'
+} else throw 'Входной запрос / URL файла!!'
 }
-handler.command = /^(sfile)$/i
+handler.command = /^(файл)$/i
 
 export default handler
 

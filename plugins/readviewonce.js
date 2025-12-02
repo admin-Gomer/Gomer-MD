@@ -4,14 +4,14 @@ let { downloadContentFromMessage } = (await import('@whiskeysockets/baileys'))
 
 let handler = async (m, { conn }) => {
 let quoted = m.quoted
-if (!quoted) return conn.reply(m.chat, `*Responde a un mensaje de una sola vez "ViewOnce" para ver su contenido.*`, m)
+if (!quoted) return conn.reply(m.chat, `*Ответьте на сообщение за один раз "ViewOnce" для просмотра его содержимого.*`, m)
 
 try {
 let viewOnceMessage = quoted.viewOnce ? quoted : quoted.mediaMessage?.imageMessage || quoted.mediaMessage?.videoMessage || quoted.mediaMessage?.audioMessage
 let messageType = viewOnceMessage.mimetype || quoted.mtype
 let stream = await downloadContentFromMessage(viewOnceMessage, messageType.split('/')[0])
     
-if (!stream) return conn.reply(m.chat, `*❌ No se pudo descargar el contenido.*`, m)
+if (!stream) return conn.reply(m.chat, `*❌ Не удалось загрузить контент.*`, m)
   
 let buffer = Buffer.from([])
 for await (const chunk of stream) {
@@ -28,10 +28,10 @@ await conn.sendMessage(m.chat, { image: buffer, caption: viewOnceMessage.caption
 await conn.sendMessage(m.chat, { audio: buffer, mimetype: 'audio/ogg; codecs=opus', ptt: viewOnceMessage.ptt || false }, { quoted: m })
   
 }} catch {
-conn.reply(m.chat, `*❌ No es un mensaje de imagen, video o audio ViewOnce.*`, m)
+conn.reply(m.chat, `*❌ Это не изображение, видео или аудиосообщение ViewOnce.*`, m)
 }}
 
-handler.command = /^(readviewonce|read|viewonce|ver)$/i
+handler.command = /^(readviewonce|читать|смотреть|ver)$/i
 handler.register = true
 
 export default handler

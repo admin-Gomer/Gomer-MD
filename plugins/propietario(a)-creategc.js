@@ -1,20 +1,20 @@
 let handler = async (m, { conn, text }) => {
 
-if (!text) return m.reply('╰⊱❌⊱ *ERROR* / *MISTAKE* ⊱❌⊱╮\n𝗘𝗦𝗖𝗥𝗜𝗕𝗔 𝗘𝗟 𝗡𝗢𝗠𝗕𝗥𝗘 𝗗𝗘𝗟 𝗚𝗥𝗨𝗣𝗢 🌟\n\n𝗪𝗥𝗜𝗧𝗘 𝗧𝗛𝗘 𝗡𝗔𝗠𝗘 𝗢𝗙 𝗧𝗛𝗘 𝗚𝗥𝗢𝗨𝗣 🌟')
+if (!text) return m.reply('❌ *ОШИБКА* ❌\nВВЕДИТЕ ИМЯ ГРУППЫ 🌟\n\nНАПИШИТЕ НАЗВАНИЕ  🌟')
 try{
 //m.react('😺')
-m.reply('╰⊱✅️⊱ *REALIZADO* / *DONE* ⊱✅️⊱╮\n😊 𝗖𝗥𝗘𝗔𝗡𝗗𝗢 𝗘𝗟 𝗚𝗥𝗨𝗣𝗢, 𝗕𝗬: 𝗚𝗔𝗧𝗔𝗕𝗢𝗧\n\n😊 𝗖𝗥𝗘𝗔𝗧𝗜𝗡𝗚 𝗧𝗛𝗘 𝗚𝗥𝗢𝗨𝗣, 𝗕𝗬: 𝗚𝗔𝗧𝗔𝗕𝗢𝗧')
+m.reply('✅️ *ДОГОВОРИЛИСЬ* ✅\n😊 ГРУППУ СОЗДАЛ\n            *G O M E R*')
 let group = await conn.groupCreate(text, [m.sender])
 let link = await conn.groupInviteCode(group.gid)
 let url = 'https://chat.whatsapp.com/' + link;
-m.reply('😺 *Link del Grupo:* ' + url)
+m.reply('😺 *Ссылка на группу:* ' + url)
 } catch (e) {
-m.reply(`╰⊱❌⊱ *FALLÓ* / *FAILED* ⊱❌⊱╮\n❌ 𝗘𝗥𝗥𝗢𝗥\n\n❌ 𝗠𝗜𝗦𝗧𝗔𝗞𝗘`)
+m.reply(`❌ *НЕУДАВШИЙСЯ* ❌\n❌ ОШИБКА❌ О`)
 }
 }
-handler.help = ['newgc *<nombre>*']
+handler.help = ['создать *<nombre>*']
 handler.tags = ['owner']
-handler.command = ['newgc', 'gcnew', 'creargc', 'creargrupo']
+handler.command = ['newgc', 'gcnew', 'creargc', 'создать']
 handler.owner = true
 //handler.premium = false
 export default handler
